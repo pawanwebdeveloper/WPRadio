@@ -14,3 +14,7 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
+<div class="wrap about-wrap full-width-layout">
+	<?php Wp_Radio_Admin::render_intro_partial(); ?>
+</div>

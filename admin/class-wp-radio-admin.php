@@ -52,6 +52,9 @@ class Wp_Radio_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		// Add the menu.
+		add_action( 'admin_menu', array( $this, 'add_menu_page' ) );
+
 	}
 
 	/**
@@ -98,6 +101,46 @@ class Wp_Radio_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-radio-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	/**
+	 * Adds the menu.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_menu_page() {		
+
+		add_menu_page(
+			__( 'Wordpress Radio', 'wp-radio' ),
+			__( 'Wordpress Radio', 'wp-radio' ),
+			'manage_options',
+			'wp-radio',
+			array(
+				$this,
+				'render_admin_callback',
+			)
+		);
+		add_submenu_page( 'wp-radio',__( 'Dashboard', 'wp-radio' ),__( 'Dashboard', 'wp-radio' ), 'manage_options', 'wp-radio');	
+		add_submenu_page('wp-radio', __( 'Podcasts', 'wp-radio' ), __( 'Podcasts', 'wp-radio' ), 'manage_options', 'wp-radio' );
+		add_submenu_page('wp-radio', __( 'Shortcodes / Widgets', 'wp-radio' ), __( 'Shortcodes / Widgets', 'wp-radio' ), 'manage_options', 'wp-radio' );
+	}
+
+	/**
+	 * Admin page callback.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_admin_callback() {
+		require( plugin_dir_path( __FILE__ ) . 'partials/wp-radio-admin-display.php' );		
+	}
+
+	/**
+	 * Intro
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_intro_partial() {
+		require( plugin_dir_path( __FILE__ ) . 'partials/views/intro.php' );
 	}
 
 }
