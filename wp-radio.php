@@ -13,7 +13,7 @@
  * @package           Wp_Radio
  *
  * @wordpress-plugin
- * Plugin Name:       WP Radio
+ * Plugin Name:       Wordpress Radio
  * Plugin URI:        https://github.com/pawanwebdeveloper/WPRadio
  * Description:       Wordpress radio plugin to show all data.
  * Version:           1.0.0
