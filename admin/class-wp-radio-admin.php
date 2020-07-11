@@ -121,12 +121,31 @@ class Wp_Radio_Admin {
 			)
 		);
 		add_submenu_page( 'wp-radio',__( 'Dashboard', 'wp-radio' ),__( 'Dashboard', 'wp-radio' ), 'manage_options', 'wp-radio');	
-		add_submenu_page('wp-radio', __( 'Podcasts', 'wp-radio' ), __( 'Podcasts', 'wp-radio' ), 'manage_options', 'wp-radio' );
-		add_submenu_page('wp-radio', __( 'Shortcodes / Widgets', 'wp-radio' ), __( 'Shortcodes / Widgets', 'wp-radio' ), 'manage_options', 'wp-radio' );
+		add_submenu_page('wp-radio', __( 'Podcasts', 'wp-radio' ), __( 'Podcasts', 'wp-radio' ), 'manage_options', 'wp-radio-podcasts',
+			array(
+				$this,
+				'render_admin_callback_podcasts',
+			) 
+		);
+		add_submenu_page('wp-radio', __( 'Shortcodes / Widgets', 'wp-radio' ), __( 'Shortcodes / Widgets', 'wp-radio' ), 'manage_options', 'wp-radio-shortcode',
+			array(
+				$this,
+				'render_admin_callback_shortcode',
+			)  
+		);
+		add_submenu_page('wp-radio', __( 'Settings', 'wp-radio' ), __( 'Settings', 'wp-radio' ), 'manage_options', 'wp-radio-settings',
+			array(
+				$this,
+				'render_admin_callback_settings',
+			) 
+		);
+
+		/* Options Register*/
+		add_action( 'admin_init', array($this,'wpradio_register_settings') );
 	}
 
 	/**
-	 * Admin page callback.
+	 * Dashboard page callback.
 	 *
 	 * @since 1.0.0
 	 */
@@ -135,12 +154,75 @@ class Wp_Radio_Admin {
 	}
 
 	/**
+	 * Podcasts page callback.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_admin_callback_podcasts() {
+		//require( plugin_dir_path( __FILE__ ) . 'partials/wp-radio-admin-display.php' );		
+	}
+
+	/**
+	 * Shortcodes / Widgets page callback.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_admin_callback_shortcode() {
+		//require( plugin_dir_path( __FILE__ ) . 'partials/wp-radio-admin-display.php' );		
+	}
+
+	/**
+	 * Settings page callback.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_admin_callback_settings() {
+		require( plugin_dir_path( __FILE__ ) . 'partials/pages/wp-radio-admin-settings.php' );		
+	}
+
+	/**
 	 * Intro
 	 *
 	 * @since 1.0.0
 	 */
-	public function render_intro_partial() {
+	public function render_intro_partial() {		
 		require( plugin_dir_path( __FILE__ ) . 'partials/views/intro.php' );
+		require( plugin_dir_path( __FILE__ ) . 'partials/views/script.php' );
+	}
+
+	/**
+	 * Settiing Options
+	 *
+	 * @since 1.0.0
+	 */
+	function wpradio_register_settings() {   		
+   		register_setting( 'wpradio_options_group', 'wpradio_public_token');
+   		register_setting( 'wpradio_options_group', 'wpradio_private_token');
+	}
+
+	/**
+	 * Admin Notice Success
+	 *
+	 * @since 1.0.0
+	 */
+	function wpradio_admin_notice__success($text) {
+    ?>
+    	<div class="notice notice-success is-dismissible">
+        	<p><?php _e( $text, 'wp-radio' ); ?></p>
+    	</div>
+    	<?php
+	}
+
+	/**
+	 * Admin Notice Error
+	 *
+	 * @since 1.0.0
+	 */
+	function wpradio_admin_notice__error($text) {
+		$class = 'notice notice-error';
+		$message = __( $text, 'sample-text-domain' );
+
+		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) ); 
 	}
 
 }

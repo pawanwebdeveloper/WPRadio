@@ -36,6 +36,9 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_RADIO_VERSION', '1.0.0' );
+define( 'NEWS_RSS', 'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml');
+define( 'TUTORIAL_RSS', 'https://www.reddit.com/r/worldnews/.rss' );
+define( 'HELP_LINK', 'https://www.reddit.com/r/worldnews/.rss' );
 
 /**
  * The code that runs during plugin activation.
