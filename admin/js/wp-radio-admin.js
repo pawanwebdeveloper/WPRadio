@@ -98,12 +98,58 @@ function subscription_information(API_URL) {
 	      		<tr>
 					<td data-label="plan">Plan</td>
 					<td data-label="plan">`+data.subscription.plan_name+`</td>					
-				</tr>
+				</tr>`;
+			if(data.subscription.addons_count > 0){			  
+				html3 += 
+				`<tr>
+					<td data-label="plan">Addons</td><td data-label="plan">
+						<table class="ui celled table"><thead><tr><th>Addon name</th><th>Quantity</th></tr></thead>`;
+					$.each(data.subscription.addons, function (i, e) {
+					html3 +=`<tr><td>`+e.addon_name+`</td><td>`+ e.quantity+`</td></tr>`;	
+					});				
+				html3 += 
+				`</table></td></tr>`;
+			  
+			}	
+			html3 +=`	
 				<tr>
 					<td data-label="plan">Broadcast Channels</td>
 					<td data-label="plan">`+data.channels.length+` / `+data.subscription.max_channels+`</td>					
-				</tr>	
-			`;                
+				</tr>
+				<tr>
+					<td data-label="plan">Listener Slots</td>
+					<td data-label="plan">`+data.subscription.listeners_slots+`</td>					
+				</tr>
+				<tr>
+					<td data-label="plan">Maximum Quality/Bitrate</td>
+					<td data-label="plan">`+data.subscription.bitrate+`</td>					
+				</tr>
+
+				<tr>
+					<td data-label="plan">Podcasts recorder</td>
+					<td data-label="plan">`;
+					if(data.subscription.podcasts_recorder != null){
+						html3 +=`Enabled`;
+					}else{
+						html3 +=`Disabled`;
+					}
+			html3 +=`
+					</td>					
+				</tr>`
+			if(data.subscription.podcasts_recorder != null){
+				html3 += 
+				`<tr>
+					<td data-label="plan">Podcast Duration</td>
+					<td data-label="plan">`+data.subscription.podcasts_recorder.duration+`</td>					
+				</tr>
+				<tr>
+					<td data-label="plan">Number of Podcasts</td>
+					<td data-label="plan">`+data.subscription.podcasts_recorder.amount+`</td>					
+				</tr>
+				`;
+			}	
+
+				;                
      		jQuery('#pi_server_info').html(html3);  
         }  
 	}); 

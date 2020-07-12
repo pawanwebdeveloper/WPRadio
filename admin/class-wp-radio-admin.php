@@ -118,7 +118,8 @@ class Wp_Radio_Admin {
 			array(
 				$this,
 				'render_admin_callback',
-			)
+			),
+			'dashicons-controls-volumeoff'
 		);
 		add_submenu_page( 'wp-radio',__( 'Dashboard', 'wp-radio' ),__( 'Dashboard', 'wp-radio' ), 'manage_options', 'wp-radio');	
 		add_submenu_page('wp-radio', __( 'Podcasts', 'wp-radio' ), __( 'Podcasts', 'wp-radio' ), 'manage_options', 'wp-radio-podcasts',
