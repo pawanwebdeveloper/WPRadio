@@ -77,6 +77,8 @@ class Wp_Radio_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-radio-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'_semantic', 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css', array(), $this->version, 'all' );
+
 
 	}
 
@@ -100,6 +102,8 @@ class Wp_Radio_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-radio-admin.js', array( 'jquery' ), $this->version, false );
+
+		wp_enqueue_script( $this->plugin_name.'_semantic', 'https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -187,8 +191,8 @@ class Wp_Radio_Admin {
 	 * @since 1.0.0
 	 */
 	public function render_intro_partial() {		
-		require( plugin_dir_path( __FILE__ ) . 'partials/views/intro.php' );
-		require( plugin_dir_path( __FILE__ ) . 'partials/views/script.php' );
+			require( plugin_dir_path( __FILE__ ) . 'partials/views/intro.php' );
+			require( plugin_dir_path( __FILE__ ) . 'partials/views/script.php' );		
 	}
 
 	/**

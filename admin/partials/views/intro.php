@@ -62,20 +62,53 @@
 	</div>
 
 	<div class="ui grid pi_margin_top_main">
-		<div class="ten wide column" wfd-id="162">
+		<div class="seven wide column" wfd-id="162">
 	  		<div class="ui card" wfd-id="316" style="width:100%">
 				<div class="content" wfd-id="329">
 			    	<div class="header" wfd-id="330"><?php echo __('Subscription Information','wp-radio'); ?></div>
 				</div>
 				<div class="content" wfd-id="318">
 					<div class="ui relaxed divided list"   wfd-id="419"></div>
-					<table class="ui celled table">
-						  <thead>
-						    <tr><th><?php echo __('Title','wp-radio'); ?></th>
-						    <th><?php echo __('Info','wp-radio'); ?></th>
-						  </tr></thead>
-						  <tbody id="pi_server_info"></tbody>
-					</table>			  		
+					<?php 
+						if(!empty(get_option('wpradio_private_token'))){ //We will show the data if token is set ?>
+							<table class="ui celled table">
+								  <thead>
+								    <tr><th><?php echo __('Title','wp-radio'); ?></th>
+								    <th><?php echo __('Info','wp-radio'); ?></th>
+								  </tr></thead>
+								  <tbody id="pi_subscription_info"></tbody>
+							</table>	
+					<?php 
+						} else {			
+							echo sprintf( __( 'Tokens are not set, You can set your Caster.fm API Tokens by clicking <a href="%s">here</a>.', 'wp-radio' ), 'admin.php?page=wp-radio-settings');
+						} 
+					?>		  		
+			  	</div>
+			</div>
+	  	</div>
+
+
+	  	<div class="seven wide column" wfd-id="162">
+	  		<div class="ui card" wfd-id="316" style="width:100%">
+				<div class="content" wfd-id="329">
+			    	<div class="header" wfd-id="330"><?php echo __('Server Information','wp-radio'); ?></div>
+				</div>
+				<div class="content" wfd-id="318">
+					<div class="ui relaxed divided list"   wfd-id="419"></div>
+					<?php 
+						if(!empty(get_option('wpradio_private_token'))){ //We will show the data if token is set ?>
+							<table class="ui celled table">
+								  <thead>
+								    <tr><th><?php echo __('Title','wp-radio'); ?></th>
+								    <th><?php echo __('Info','wp-radio'); ?></th>
+								  </tr></thead>
+								  <tbody id="pi_server_info"></tbody>
+							</table>	
+					<?php 
+						} else {			
+							echo sprintf( __( 'Tokens are not set, You can set your Caster.fm API Tokens by clicking <a href="%s">here</a>.', 'wp-radio' ), 'admin.php?page=wp-radio-settings');
+						} 
+					?>		  		
 			  	</div>
 			</div>
 	  	</div>
